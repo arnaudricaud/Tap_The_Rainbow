@@ -13,8 +13,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    camera.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    camera.h
 
 FORMS    += mainwindow.ui
+
+INCLUDEPATH +=$$(OPENCV_DIR)\..\..\include
+
+LIBS += -L$$(OPENCV_DIR)\lib \
+    -lopencv_core2413 \
+    -lopencv_highgui2413 \
+    -lopencv_imgproc2413 \
+    -lopencv_features2d2413 \
+    -lopencv_calib3d2413
+
