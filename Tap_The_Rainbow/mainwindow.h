@@ -2,7 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "camera.h"
+#include <QTimer>
+#include "opencv2/opencv.hpp"
+
+
+using namespace cv;
 
 namespace Ui {
 class MainWindow;
@@ -16,9 +20,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void update();
+
+
 private:
     Ui::MainWindow *ui;
-    Camera *cam = new Camera();
+    VideoCapture * cam;
+    QTimer *timer = new QTimer(this);
+
 };
 
 #endif // MAINWINDOW_H
