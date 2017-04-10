@@ -28,3 +28,4 @@ LIBS += -L$$(OPENCV_DIR)\lib \
     -lopencv_features2d2413 \
     -lopencv_calib3d2413
 
+
