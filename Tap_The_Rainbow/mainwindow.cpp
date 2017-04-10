@@ -101,3 +101,16 @@ void MainWindow::update(){
 
     }
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    if (cam->isOpened()) {
+        Mat image;
+        if (cam->read(image))
+    namedWindow("Image de calibrage",1);
+    imshow("Image de calibrage", image);
+    }
+    else {
+        ui->camInfo->setText("Error capturing the frame");
+    }
+}
