@@ -56,6 +56,5 @@ int main()
     imshow("My Image",image);
     waitKey(0);
 
-
     return 0;
 }
