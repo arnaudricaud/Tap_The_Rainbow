@@ -53,7 +53,7 @@ void MainWindow::update(){
         Mat image;
         if (cam->read(image)) {   // Capture a frame
            // Flip to get a mirror effect
-           // flip(image,image,1);
+           flip(image,image,1);
 
             // Invert Blue and Red color channels
             cvtColor(image,image,CV_BGR2RGB);
@@ -63,7 +63,7 @@ void MainWindow::update(){
             ui->camFrame->setPixmap(QPixmap::fromImage(img));
             // Resize the label to fit the image
             ui->camFrame->resize(ui->camFrame->pixmap()->size());
-            qDebug()<<ui->camFrame->pixmap()->size();
+            //qDebug()<<ui->camFrame->pixmap()->size();
         }
         else {
             ui->camInfo->setText("Error capturing the frame");
@@ -83,10 +83,10 @@ void MainWindow::on_pushButton_clicked()
         if (cam->read(image)){ //image est notre image de calibrage.
             //Il faut appliquer des traitements pour trouver le point
             //qui va permettre de découper notre image en 4 imagettes.
-                namedWindow("Image de calibrage",1);
-                imshow("Image de calibrage", image);
+               // namedWindow("Image de calibrage",1);
+               // imshow("Image de calibrage", image);
                 // Motif que l'on recherche
-                Mat templateImage = imread("C:/Users/Mon PC/Desktop/Tap_The_Rainbow/Tap_The_Rainbow/Snap2.JPG");
+                Mat templateImage = imread("imagesSrc/Snap2.JPG");
                 int result_cols =  image.cols - templateImage.cols + 1;
                 int result_rows = image.rows - templateImage.rows + 1;
                 resultImage.create( result_cols, result_rows, CV_32FC1 );
@@ -121,9 +121,62 @@ void MainWindow::on_pushButton_clicked()
                 Img4=Img4.rowRange(maxLoc.y,height);
                 namedWindow("BAS DROIT",1);
                 imshow("BAS DROIT", Img4);
+               QString instrument= detectionInstrument(Img4,maxLoc);
+               qDebug()<<instrument;
          }
     }
     else {
         ui->camInfo->setText("Error capturing the frame");
+    }
+}
+
+
+QString  MainWindow::detectionInstrument(Mat image,Point centre){
+    Mat resultImage;
+    Mat templateImage;
+    int i =0;
+    double minVal; double maxVal; Point minLoc; Point maxLoc;
+
+    while(maxVal>0.95){
+        switch(i){ //Choix de l'instrument
+        case 0 :  templateImage = imread("");
+            break;
+        case 1 : templateImage = imread("");
+            break;
+        case 2 : templateImage = imread("");
+            break;
+        case 3 : templateImage = imread("");
+            break;
+        default :
+            break;
+        }
+            int result_cols =  image.cols - templateImage.cols + 1;
+            int result_rows = image.rows - templateImage.rows + 1;
+            resultImage.create( result_cols, result_rows, CV_32FC1 );
+            matchTemplate( image, templateImage, resultImage, TM_CCORR_NORMED );
+            minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
+            i=+1;
+            }
+
+
+
+    //détermination de l'instrument
+    if(maxLoc.x<centre.x){
+        if(maxLoc.y<centre.y){
+            QString res= "Piano 1";
+            return res;
+        }else{
+            QString res= "Pas Piano 1";
+            return res;
+        }
+
+    }else{
+        if(maxLoc.y<centre.y){
+        QString res= "Batterie";
+        return res;
+        }else{
+            QString res= "Batterie";
+            return res;
+        }
     }
 }

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>imagesSrc/batterie_ID.jpg</file>
+        <file>imagesSrc/flute.jpg</file>
+        <file>imagesSrc/harpe.jpg</file>
+        <file>imagesSrc/piano_ID.jpg</file>
+        <file>imagesSrc/Snap2.JPG</file>
+        <file>imagesSrc/TapTheRainBOOOOOOOOW.png</file>
+    </qresource>
+</RCC>

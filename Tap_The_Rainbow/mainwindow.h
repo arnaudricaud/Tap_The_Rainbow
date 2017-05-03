@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTimer>
 #include "opencv2/opencv.hpp"
+#include <QPixmap>
 
 
 using namespace cv;
@@ -19,6 +20,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    QString detectionInstrument(Mat, Point);
 
 private slots:
     void update();
