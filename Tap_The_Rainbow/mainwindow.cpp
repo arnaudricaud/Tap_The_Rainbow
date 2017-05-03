@@ -7,6 +7,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <cstdio>
+#include <QDir>
 
 using namespace cv;
 using namespace std;
@@ -86,7 +87,9 @@ void MainWindow::on_pushButton_clicked()
                // namedWindow("Image de calibrage",1);
                // imshow("Image de calibrage", image);
                 // Motif que l'on recherche
-                Mat templateImage = imread("imagesSrc/Snap2.JPG");
+           // QString CurrentDir = QDir::currentPath();
+           // qDebug()<<"Chemin : "<<CurrentDir;
+                Mat templateImage = imread("./debug/imagesSrc/TapTheRainBOOOOOOOOW.png");  //QPixmap
                 int result_cols =  image.cols - templateImage.cols + 1;
                 int result_rows = image.rows - templateImage.rows + 1;
                 resultImage.create( result_cols, result_rows, CV_32FC1 );
@@ -121,8 +124,8 @@ void MainWindow::on_pushButton_clicked()
                 Img4=Img4.rowRange(maxLoc.y,height);
                 namedWindow("BAS DROIT",1);
                 imshow("BAS DROIT", Img4);
-               QString instrument= detectionInstrument(Img4,maxLoc);
-               qDebug()<<instrument;
+              // QString instrument= detectionInstrument(Img4,maxLoc);
+              // qDebug()<<instrument;
          }
     }
     else {
@@ -139,13 +142,13 @@ QString  MainWindow::detectionInstrument(Mat image,Point centre){
 
     while(maxVal>0.95){
         switch(i){ //Choix de l'instrument
-        case 0 :  templateImage = imread("");
+        case 0 :  templateImage = imread("./debug/imagesSrc/batterie_ID.jpg");
             break;
-        case 1 : templateImage = imread("");
+        case 1 : templateImage = imread("./debug/imagesSrc/harpe.jpg");
             break;
-        case 2 : templateImage = imread("");
+        case 2 : templateImage = imread("./debug/imagesSrc/piano_ID.jpg");
             break;
-        case 3 : templateImage = imread("");
+        case 3 : templateImage = imread("./debug/imagesSrc/flute.jpg");
             break;
         default :
             break;
