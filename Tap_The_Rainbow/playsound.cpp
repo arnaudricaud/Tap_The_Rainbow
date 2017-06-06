@@ -7,31 +7,31 @@ PlaySound::PlaySound()
 
 void PlaySound::playNote(int couleurs){
     switch(couleurs):
-    case 1 : QSound::play("/C:/Users/moulin-d/Downloads/MLDClapLess.wav");
+    case 1 : QSound::play("/sons/MLDClapLess.wav");
         break;
-    case 2 : QSound::play("/C:/Users/moulin-d/Downloads/MLDSnareDeeper.wav");
+    case 2 : QSound::play("/sons/MLDSnareDeeper.wav");
         break;
-    case 3 : QSound::play("/C:/Users/moulin-d/Downloads/MLDKickKnockLong.wav");
+    case 3 : QSound::play("/sons/MLDKickKnockLong.wav");
         break;
-    case 4 : QSound::play("/C:/Users/moulin-d/Downloads/MLDCowbell.wav");
+    case 4 : QSound::play("/sons/Downloads/MLDCowbell.wav");
         break;
-    case 5 : QSound::play("/C:/Users/moulin-d/Downloads/MLDHat2.wav");
+    case 5 : QSound::play("/sons/MLDHat2.wav");
         break;
-    case 6 : QSound::play("/C:/Users/moulin-d/Downloads/MLDClapLess.wav");
+    case 6 : QSound::play("/sons/MLDClapLess.wav");
         break;
-    case 7 : QSound::play("/C:/Users/moulin-d/Downloads/MLDSnareDeeper.wav");
+    case 7 : QSound::play("/sons/MLDSnareDeeper.wav");
         break;
-    case 8 : QSound::play("/C:/Users/moulin-d/Downloads/MLDKickKnockLong.wav");
+    case 8 : QSound::play("/sons/MLDKickKnockLong.wav");
         break;
-    case 9 : QSound::play("/C:/Users/moulin-d/Downloads/MLDCowbell.wav");
+    case 9 : QSound::play("/sons/MLDCowbell.wav");
         break;
-    case 10 : QSound::play("/C:/Users/moulin-d/Downloads/MLDHat2.wav");
+    case 10 : QSound::play("/sons/MLDHat2.wav");
         break;
-    case 11 : QSound::play("/C:/Users/moulin-d/Downloads/MLDKickKnockLong.wav");
+    case 11 : QSound::play("/sons/MLDKickKnockLong.wav");
         break;
-    case 12 : QSound::play("/C:/Users/moulin-d/Downloads/MLDCowbell.wav");
+    case 12 : QSound::play("/sons/MLDCowbell.wav");
         break;
-    case 13 : QSound::play("/C:/Users/moulin-d/Downloads/MLDHat2.wav");
+    case 13 : QSound::play("/sons/MLDHat2.wav");
         break;
     defautl : qDebug()<<"Something went wrong";
         break;
