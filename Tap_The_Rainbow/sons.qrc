@@ -1,1 +1,9 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/sons">
+        <file>Ressource/MLDClapLess.wav</file>
+        <file>Ressource/MLDCowbell.wav</file>
+        <file>Ressource/MLDHat2.wav</file>
+        <file>Ressource/MLDKickKnockLong.wav</file>
+        <file>Ressource/MLDSnareDeeper.wav</file>
+    </qresource>
+</RCC>

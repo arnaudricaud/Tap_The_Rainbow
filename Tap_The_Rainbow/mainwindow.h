@@ -5,6 +5,7 @@
 #include <QTimer>
 #include "opencv2/opencv.hpp"
 #include <QPixmap>
+#include "traitement_images.h"
 
 
 using namespace cv;
@@ -35,6 +36,9 @@ private:
     int *PositionX=0;
     int *PositionY=0;
     bool ok=true;
+    Traitement_images TI;
+    Mat calibration;
+    Mat capture;
 };
 
 #endif // MAINWINDOW_H

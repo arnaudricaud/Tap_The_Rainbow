@@ -14,8 +14,8 @@ class Traitement_images
 {
 public:
     Traitement_images();
-    Mat reconstruction(Mat calibration,Mat capture);
-    void detectCouleur(Mat image);
+    void reconstruction(Mat calibration,Mat capture);
+    void detectCouleur(Mat image, Mat mask);
 private:
     PlaySound note;
 };

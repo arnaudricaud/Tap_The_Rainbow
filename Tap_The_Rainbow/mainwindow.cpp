@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <QDir>
 #include <QMouseEvent>
+#include <QThread>
 
 using namespace cv;
 using namespace std;
@@ -35,7 +36,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
-    timer->start(50);
+    calibration = imread("C:/Users/Arnaud/Pictures/Camera Roll/IMG 2.0/calibration1.jpg");
+    capture = imread("C:/Users/Arnaud/Pictures/Camera Roll/IMG 2.0/vert1.jpg");
+
+    timer->start(500);
 
 }
 
@@ -46,6 +50,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::update(){
 
+    TI.reconstruction(calibration, capture);
 
     // Definition of the template rectangle
    // int templateWidth=80;
