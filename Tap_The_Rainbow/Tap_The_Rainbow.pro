@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    traitement_images.cpp
+    traitement_images.cpp \
+    playsound.cpp
 
 HEADERS  += mainwindow.h \
-    traitement_images.h
+    traitement_images.h \
+    playsound.h
 
 FORMS    += mainwindow.ui
 
