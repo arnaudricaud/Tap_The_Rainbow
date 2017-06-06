@@ -29,6 +29,10 @@ private slots:
 
     void on_checkAuto_clicked();
 
+    void on_calibrationButton_clicked();
+
+    void on_imgCalib_clicked();
+
 private:
     Ui::MainWindow *ui;
     VideoCapture *cam;
@@ -37,6 +41,8 @@ private:
     int *PositionY=0;
     bool ok=true;
     Traitement_images TI;
+    bool calibrationOk;
+    Mat calibrationImg;
     Mat calibration;
     Mat capture;
 };

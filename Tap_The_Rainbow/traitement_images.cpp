@@ -48,12 +48,12 @@ void Traitement_images::reconstruction(Mat calibration, Mat capture){
 
     // binarisation
     cvtColor(soustraction,soustraction,CV_RGB2GRAY);
+
     // /!\ Equal Hist!!! Pas de pb si on ne touche pas la nappe (zone +claire => 255??)
     equalizeHist(soustraction,soustraction);    //Nécessaire? OUI! (seuil plus haut et évite les problème en cas de pb sombre!)
-
-    threshold(soustraction,soustraction,200,255,CV_THRESH_BINARY); //150 semble ok car equalizeHist!
     imshow("zizi",soustraction);
-
+    threshold(soustraction,soustraction,230,255,CV_THRESH_BINARY); //150 semble ok car equalizeHist!
+    imshow("zizi2",soustraction);
     //PREND 66ms
 
     // detection de couleur et son

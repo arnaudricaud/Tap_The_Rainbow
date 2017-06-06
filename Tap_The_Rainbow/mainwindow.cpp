@@ -24,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent) :
     cam=new VideoCapture(0);
     int width=cam->get(CV_CAP_PROP_FRAME_WIDTH);
     int height=cam->get(CV_CAP_PROP_FRAME_HEIGHT);
+    width=width/2;
+    height=height/2;
+    cam->set(CV_CAP_PROP_FRAME_WIDTH, width);
+    cam->set(CV_CAP_PROP_FRAME_HEIGHT, width);
 
     if(!cam->isOpened())  // check if we succeeded
     {
@@ -37,10 +41,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
     calibration = imread("C:/Users/Arnaud/Pictures/Camera Roll/IMG 2.0/calibration1.jpg");
-    capture = imread("C:/Users/Arnaud/Pictures/Camera Roll/IMG 2.0/vert1.jpg");
-    cv::resize(calibration,calibration,Size(),0.4,0.4);
-    cv::resize(capture,capture,Size(),0.4,0.4);
-
+    capture = imread("C:/Users/Arnaud/Pictures/Camera Roll/IMG 2.0/rouge3.jpg");
+    cv::resize(calibration,calibration,Size(),0.5,0.5);
+    cv::resize(capture,capture,Size(),0.5,0.5);
+    calibrationOk = false;
     timer->start(1000);
 
 }
@@ -51,20 +55,11 @@ MainWindow::~MainWindow()
     delete cam;
 }
 void MainWindow::update(){
-
-    TI.reconstruction(calibration, capture);
-
-    // Definition of the template rectangle
-   // int templateWidth=80;
-   // int templateHeight=80;
-
-
     if (cam->isOpened()) {
         Mat image;
         if (cam->read(image)) {   // Capture a frame
            // Flip to get a mirror effect
            flip(image,image,1);
-
             // Invert Blue and Red color channels
             cvtColor(image,image,CV_BGR2RGB);
             // Convert to Qt image
@@ -74,11 +69,24 @@ void MainWindow::update(){
             // Resize the label to fit the image
             ui->camFrame->resize(ui->camFrame->pixmap()->size());
             //qDebug()<<ui->camFrame->pixmap()->size();
+            //TRAITEMENT IMAGE
+            if(calibrationOk){
+               TI.reconstruction(calibrationImg,image);
+            } else {
+                calibrationImg = image;
+            }
         }
         else {
             ui->camInfo->setText("Error capturing the frame");
         }
     }
+
+
+
+
+    //TESTS
+    //TI.reconstruction(calibration, capture);
+    //FIN TESTS
 }
 
 
@@ -265,5 +273,15 @@ void MainWindow::on_checkAuto_clicked()
        /* int lPositionX = event->x();
         int lPositionY = event->y();
          qDebug()<<"x: "<<lPositionX<<" et y: "<<lPositionY;*/
+
+}
+
+void MainWindow::on_imgCalib_clicked()
+{
+    if (ui->imgCalib->isChecked()){
+        calibrationOk = true;
+    } else{
+        calibrationOk = false;
+    }
 
 }
