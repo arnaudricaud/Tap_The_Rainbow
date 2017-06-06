@@ -81,6 +81,7 @@ void Traitement_images::detectCouleur(Mat image){
         qDebug()<<"jaune-vert";
     }else if(teinte>=105 && teinte<135){
         qDebug()<<"vert";
+        note.playNote(1);
     }else if(teinte>=135 && teinte<165){
         qDebug()<<"bleu-vert";
     }else if(teinte>=165 && teinte<195){

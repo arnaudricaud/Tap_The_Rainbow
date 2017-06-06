@@ -4,6 +4,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include "opencv2/opencv.hpp"
+#include "playsound.h"
 #include <QDebug>
 
 using namespace cv;
@@ -15,6 +16,8 @@ public:
     Traitement_images();
     Mat reconstruction(Mat calibration,Mat capture);
     void detectCouleur(Mat image);
+private:
+    PlaySound note;
 };
 
 #endif // TRAITEMENT_IMAGES_H
