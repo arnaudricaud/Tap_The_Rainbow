@@ -14,6 +14,7 @@ class Traitement_images
 public:
     Traitement_images();
     Mat reconstruction(Mat calibration,Mat capture);
+    void detectCouleur(Mat image);
 };
 
 #endif // TRAITEMENT_IMAGES_H

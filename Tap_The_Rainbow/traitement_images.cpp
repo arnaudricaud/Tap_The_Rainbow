@@ -48,3 +48,58 @@ Mat Traitement_images::reconstruction(Mat calibration, Mat capture){
     }
     return calibration;
 }
+
+void Traitement_images::detectCouleur(Mat image){
+    float compteur=0;
+    float valeur=0;
+    float moyenne=0;
+    cvtColor(image,image,CV_BGR2HSV);
+    for (int i=0;i<image.cols;i++){
+        for (int j=0;j<image.rows;j++){
+            if((int)image.at<Vec3b>(j,i)[0]!=0){
+                compteur++;
+                valeur=valeur+image.at<Vec3b>(j,i)[0];
+            }
+        }
+    }
+
+
+// determination de la couleur
+    moyenne=valeur/compteur;
+    qDebug()<<compteur;
+    qDebug()<<moyenne;
+    imshow("resultat finale",image);
+
+    float teinte=0;
+    teinte=moyenne*360/180;
+
+        if(teinte>31 && teinte<65){
+            qDebug()<<"jaune";
+        }else{
+            if(teinte>66 && teinte<110){
+                qDebug()<<"vert clair";
+            }else{
+                if(teinte>111 && teinte<130){
+                    qDebug()<<"vert foncé";
+                }else{
+                    if(teinte>150 && teinte<195){
+                        qDebug()<<"bleu clair";
+                    }else{
+                        if(teinte>200 && teinte<225){
+                            qDebug()<<"bleu foncé";
+                        }else{
+                            if(teinte>226 && teinte<270){
+                                qDebug()<<"violet";
+                            }else{
+                                if(teinte>271 && teinte<320){
+                                    qDebug()<<"magenta";
+                                }else{qDebug()<<"rouge";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+}
