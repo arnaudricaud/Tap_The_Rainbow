@@ -73,33 +73,29 @@ void Traitement_images::detectCouleur(Mat image){
     float teinte=0;
     teinte=moyenne*360/180;
 
-        if(teinte>31 && teinte<65){
-            qDebug()<<"jaune";
-        }else{
-            if(teinte>66 && teinte<110){
-                qDebug()<<"vert clair";
-            }else{
-                if(teinte>111 && teinte<130){
-                    qDebug()<<"vert foncé";
-                }else{
-                    if(teinte>150 && teinte<195){
-                        qDebug()<<"bleu clair";
-                    }else{
-                        if(teinte>200 && teinte<225){
-                            qDebug()<<"bleu foncé";
-                        }else{
-                            if(teinte>226 && teinte<270){
-                                qDebug()<<"violet";
-                            }else{
-                                if(teinte>271 && teinte<320){
-                                    qDebug()<<"magenta";
-                                }else{qDebug()<<"rouge";
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    if(teinte>15 && teinte<45){
+        qDebug()<<"orange";
+    }else if(teinte>=45 && teinte<75){
+        qDebug()<<"jaune";
+    }else if(teinte>=75 && teinte<105){
+        qDebug()<<"jaune-vert";
+    }else if(teinte>=105 && teinte<135){
+        qDebug()<<"vert";
+    }else if(teinte>=135 && teinte<165){
+        qDebug()<<"bleu-vert";
+    }else if(teinte>=165 && teinte<195){
+        qDebug()<<"cyan";
+    }else if(teinte>=195 && teinte<225){
+        qDebug()<<"bleu moyen";
+    }else if(teinte>=225 && teinte<255){
+        qDebug()<<"bleu ";
+    }else if(teinte>=255 && teinte<285){
+        qDebug()<<"violet";
+    }else if(teinte>=285 && teinte<315){
+        qDebug()<<"magenta";
+    }else if(teinte>=315 && teinte<345){
+        qDebug()<<"rose";
+    }else{qDebug()<<"rouge";
+    }
 
 }
