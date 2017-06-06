@@ -187,6 +187,7 @@ QString  MainWindow::detectionInstrument(Mat image,Point centre){
         }else{
             QString res= "Batterie";
             return res;
+
         }
     }
 }
