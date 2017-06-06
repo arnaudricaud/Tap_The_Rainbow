@@ -6,15 +6,14 @@ PlaySound::PlaySound()
 }
 
 void PlaySound::playNote(int couleurs){
-    qDebug()<<"NOOOO!";
     switch(couleurs){
-    case 1 : QSound::play("C:/MLDClapLess.wav");
+    case 1 : QSound::play(":/sons/Ressource/MLDClapLess.wav");
         break;
     case 2 : QSound::play(":/sons/Ressource/MLDSnareDeeper.wav");
         break;
     case 3 : QSound::play(":/sons/Ressource/MLDKickKnockLong.wav");
         break;
-    case 4 : QSound::play(":/sons/Ressource/Downloads/MLDCowbell.wav");
+    case 4 : QSound::play(":/sons/Ressource/MLDCowbell.wav");
         break;
     case 5 : QSound::play(":/sons/Ressource/MLDHat2.wav");
         break;
