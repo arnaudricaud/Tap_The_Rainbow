@@ -21,16 +21,20 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QString detectionInstrument(Mat, Point);
-
+    void mousePressEvent(QMouseEvent *event);
 private slots:
     void update();
     void on_pushButton_clicked();
 
+    void on_checkAuto_clicked();
+
 private:
     Ui::MainWindow *ui;
-    VideoCapture * cam;
+    VideoCapture *cam;
     QTimer *timer = new QTimer(this);
-
+    int *PositionX=0;
+    int *PositionY=0;
+    bool ok=true;
 };
 
 #endif // MAINWINDOW_H

@@ -65,6 +65,13 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="0">
+     <widget class="QCheckBox" name="checkAuto">
+      <property name="text">
+       <string>Manuelle</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -73,7 +80,7 @@
      <x>0</x>
      <y>0</y>
      <width>514</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
