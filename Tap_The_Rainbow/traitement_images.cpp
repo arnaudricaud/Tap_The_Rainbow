@@ -15,15 +15,15 @@ void Traitement_images::reconstruction(Mat calibration, Mat capture){
     Mat imgNDG;
 
     //ELEMENT STRUCTURANT
-    Mat kernel1 = getStructuringElement(MORPH_ELLIPSE,Size(5,5));
+    Mat kernel1 = getStructuringElement(MORPH_ELLIPSE,Size(1,1));
 
 
    //detection de contour
     cvtColor(origine,imgNDG,CV_RGB2GRAY);
     Canny(imgNDG,imgNDG,100,100);
-
     morphologyEx(imgNDG,imgNDG,MORPH_DILATE,kernel1); //Dilatation
-    floodFill(imgNDG,cv::Point(500,500),Scalar(255)); //Remplissage
+    floodFill(imgNDG,cv::Point(50,10),Scalar(255)); //Remplissage
+
 //    floodFill(imgNDG,cv::Point(0,0),Scalar(255));
 //    floodFill(imgNDG,cv::Point(1590,0),Scalar(255));
     bitwise_not(imgNDG,imgNDG); //Complémentaire
@@ -51,7 +51,8 @@ void Traitement_images::reconstruction(Mat calibration, Mat capture){
     // /!\ Equal Hist!!! Pas de pb si on ne touche pas la nappe (zone +claire => 255??)
     equalizeHist(soustraction,soustraction);    //Nécessaire? OUI! (seuil plus haut et évite les problème en cas de pb sombre!)
 
-    threshold(soustraction,soustraction,150,255,CV_THRESH_BINARY); //150 semble ok car equalizeHist!
+    threshold(soustraction,soustraction,200,255,CV_THRESH_BINARY); //150 semble ok car equalizeHist!
+    imshow("zizi",soustraction);
 
     //PREND 66ms
 

@@ -38,8 +38,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     calibration = imread("C:/Users/Arnaud/Pictures/Camera Roll/IMG 2.0/calibration1.jpg");
     capture = imread("C:/Users/Arnaud/Pictures/Camera Roll/IMG 2.0/vert1.jpg");
+    cv::resize(calibration,calibration,Size(),0.4,0.4);
+    cv::resize(capture,capture,Size(),0.4,0.4);
 
-    timer->start(500);
+    timer->start(1000);
 
 }
 
