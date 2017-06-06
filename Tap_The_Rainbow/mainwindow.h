@@ -26,11 +26,7 @@ public:
 private slots:
     void update();
     void on_pushButton_clicked();
-
     void on_checkAuto_clicked();
-
-    void on_calibrationButton_clicked();
-
     void on_imgCalib_clicked();
 
 private:

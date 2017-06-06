@@ -51,9 +51,9 @@ void Traitement_images::reconstruction(Mat calibration, Mat capture){
 
     // /!\ Equal Hist!!! Pas de pb si on ne touche pas la nappe (zone +claire => 255??)
     equalizeHist(soustraction,soustraction);    //Nécessaire? OUI! (seuil plus haut et évite les problème en cas de pb sombre!)
-    imshow("zizi",soustraction);
+    //imshow("zizi",soustraction);
     threshold(soustraction,soustraction,230,255,CV_THRESH_BINARY); //150 semble ok car equalizeHist!
-    imshow("zizi2",soustraction);
+    //imshow("zizi2",soustraction);
     //PREND 66ms
 
     // detection de couleur et son
@@ -91,7 +91,6 @@ void Traitement_images::detectCouleur(Mat image, Mat mask){
     timer.start();
     float teinte=0;
     teinte=moyenne*360/180;
-    qDebug()<<teinte;
     if(teinte>15 && teinte<45){
         qDebug()<<"orange";
     }else if(teinte>=45 && teinte<75){
