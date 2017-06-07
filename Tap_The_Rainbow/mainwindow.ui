@@ -55,17 +55,17 @@
         <property name="title">
          <string>Option 1 joueur</string>
         </property>
-        <widget class="QCheckBox" name="imgCalib">
+        <widget class="QPushButton" name="calibration">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>30</y>
-           <width>101</width>
-           <height>20</height>
+           <width>141</width>
+           <height>21</height>
           </rect>
          </property>
          <property name="text">
-          <string>Image Calibrée</string>
+          <string>Calibration</string>
          </property>
         </widget>
        </widget>
@@ -172,6 +172,14 @@
           <string>Instrument 4</string>
          </property>
         </widget>
+        <zorder>checkAuto</zorder>
+        <zorder>pushButton</zorder>
+        <zorder>checkBox</zorder>
+        <zorder>instrument1</zorder>
+        <zorder>instrument2</zorder>
+        <zorder>instrument3</zorder>
+        <zorder>instrument4</zorder>
+        <zorder>groupBox</zorder>
        </widget>
       </item>
      </layout>
