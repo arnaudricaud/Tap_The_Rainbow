@@ -23,6 +23,7 @@ public:
     ~MainWindow();
     QString detectionInstrument(Mat, Point);
     void mousePressEvent(QMouseEvent *event);
+    void decoupageImage();
 private slots:
     void update();
     void on_pushButton_clicked();
@@ -36,11 +37,16 @@ private:
     int *PositionX=0;
     int *PositionY=0;
     bool ok=true;
+    bool manu=false;
     Traitement_images TI;
     bool calibrationOk;
     Mat calibrationImg;
     Mat calibration;
     Mat capture;
+    Mat image;
+    int width;
+    int height;
+    Point centreImg;
 };
 
 #endif // MAINWINDOW_H
