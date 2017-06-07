@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QString detectionInstrument(Mat, Point);
+    QString detectionInstrument(Mat);
     void mousePressEvent(QMouseEvent *event);
     void decoupageImage();
 private slots:

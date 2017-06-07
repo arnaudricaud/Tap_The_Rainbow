@@ -28,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->instrument2->setEnabled(false);
     ui->instrument3->setEnabled(false);
     ui->instrument4->setEnabled(false);
+    ui->instrument1->setText("Instrumant 1");
+    ui->instrument2->setText("Instrument 2");
+    ui->instrument3->setText("Instrument 3");
+    ui->instrument4->setText("Instrument 4");
 
     imagette=false;
     cam=new VideoCapture(0);
@@ -47,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     cv::resize(calibration,calibration,Size(),0.5,0.5);
     cv::resize(capture,capture,Size(),0.5,0.5);*/
     calibrationOk = false;
-    timer->start(50);  //1000
+    timer->start(50);  // affichage de la caméra
 
 }
 
@@ -88,17 +92,6 @@ void MainWindow::modeMulti(){
     Img4T =image;
     Img4T=Img4T.colRange(maxLoc.x,width);
     Img4T=Img4T.rowRange(maxLoc.y,height);
-
-    //Test d'affichage
-   /* namedWindow("Haut GAUCHE",1);
-    imshow("Haut GAUCHE", Img1T);
-    namedWindow("HAUT DROIT",1);
-    imshow("HAUT DROIT", Img2T);
-    namedWindow("BAS GAUCHE",1);
-    imshow("BAS GAUCHE", Img3T);
-    namedWindow("BAS DROIT",1);
-    imshow("BAS DROIT", Img4T);*/
-    //fin test
 
     // TRAITEMENT si l'instrument est selectionné
     if(instrument1){
@@ -164,17 +157,27 @@ void MainWindow::on_pushButton_clicked()
      ui->pushButton->setText("Reset Calibration");
      multiT->start(1000);
      play=true;
+     QString instru;
+     instru=detectionInstrument(Img1);
+     ui->instrument1->setText(instru);
+     /*instru=detectionInstrument(Img2);
+     ui->instrument2->setText(instru);
+     instru=detectionInstrument(Img3);
+     ui->instrument3->setText(instru);
+     instru=detectionInstrument(Img4);
+     ui->instrument4->setText(instru);*/
     }
  }
 
 
-QString  MainWindow::detectionInstrument(Mat image,Point centre){
+QString  MainWindow::detectionInstrument(Mat image){
     Mat resultImage;
     Mat templateImage;
+    QString res;
     int i =0;
     double minVal; double maxVal; Point minLoc; Point maxLoc;
-
-    while(maxVal>0.95){
+    double valeurMax=0;
+    while(i!=4){
         switch(i){ //Choix de l'instrument
         case 0 :  templateImage = imread("./debug/imagesSrc/batterie_ID.jpg");
             break;
@@ -184,19 +187,36 @@ QString  MainWindow::detectionInstrument(Mat image,Point centre){
             break;
         case 3 : templateImage = imread("./debug/imagesSrc/flute.jpg");
             break;
-        default :
-            break;
         }
             int result_cols =  image.cols - templateImage.cols + 1;
             int result_rows = image.rows - templateImage.rows + 1;
             resultImage.create( result_cols, result_rows, CV_32FC1 );
-            matchTemplate( image, templateImage, resultImage, TM_CCORR_NORMED );
-            minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc, Mat());
-            i=+1;
+            matchTemplate(image, templateImage, resultImage, TM_CCORR_NORMED );
+            minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc, Mat());         
+
+            i=i+1;
+            if (maxVal>valeurMax){
+                valeurMax=maxVal;
+                 qDebug()<<valeurMax<<"i : "<<i;
             }
-    //détermination de l'instrument
-    if(maxLoc.x<centre.x){
-        if(maxLoc.y<centre.y){
+            }
+//qDebug()<<maxVal<<"i : "<<i;
+   switch(i){
+   case 0 :  res= "Batterie";
+       break;
+   case 1 :  res= "Harpe";
+       break;
+   case 2 : res= "Piano";
+       break;
+   case 3 :  res= "Flute";
+       break;
+   default:
+       res= "Instrument";
+  }
+   return res;
+   /* //détermination de l'instrument
+    if(maxLoc.x<centreImg.x){
+        if(maxLoc.y<centreImg.y){
             QString res= "Piano 1";
             return res;
         }else{
@@ -205,7 +225,7 @@ QString  MainWindow::detectionInstrument(Mat image,Point centre){
         }
 
     }else{
-        if(maxLoc.y<centre.y){
+        if(maxLoc.y<centreImg.y){
         QString res= "Batterie";
         return res;
         }else{
@@ -213,7 +233,7 @@ QString  MainWindow::detectionInstrument(Mat image,Point centre){
             return res;
 
         }
-    }
+    }*/
 }
 
 void  MainWindow::mousePressEvent(QMouseEvent *event) {
@@ -270,6 +290,7 @@ void MainWindow::decoupageImage(){
     Img4 =image;
     Img4=Img4.colRange(maxLoc.x,width);
     Img4=Img4.rowRange(maxLoc.y,height);
+
     }
     if (imagette && manu && key){
      namedWindow("Haut GAUCHE",1);

@@ -33,6 +33,7 @@ LIBS += -L$$(OPENCV_DIR)\lib \
     -lopencv_calib3d2413
 
 RESOURCES += \
-    sons.qrc
+    sons.qrc \
+    image.qrc
 
 

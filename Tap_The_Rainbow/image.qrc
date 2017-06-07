@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Ressource/flute.jpg</file>
+        <file>Ressource/harpe.jpg</file>
+        <file>Ressource/piano_ID.jpg</file>
+    </qresource>
+</RCC>
