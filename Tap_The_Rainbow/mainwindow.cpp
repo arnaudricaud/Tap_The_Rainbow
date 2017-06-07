@@ -24,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->groupBox->setEnabled(false);
     ui->pushButton->setEnabled(false);
     ui->checkAuto->setEnabled(true);
+    ui->instrument1->setEnabled(false);
+    ui->instrument2->setEnabled(false);
+    ui->instrument3->setEnabled(false);
+    ui->instrument4->setEnabled(false);
 
     imagette=false;
     cam=new VideoCapture(0);
@@ -84,10 +88,22 @@ void MainWindow::on_pushButton_clicked()
      ui->checkAuto->setEnabled(true);
      ui->checkBox->setEnabled(true);
      ui->checkBox->setChecked(false);
+     ui->instrument1->setEnabled(false);
+     ui->instrument2->setEnabled(false);
+     ui->instrument3->setEnabled(false);
+     ui->instrument4->setEnabled(false);
      ui->pushButton->setText("Valider");
     }else{
      ui->checkAuto->setEnabled(false);
      ui->checkBox->setEnabled(false);
+     ui->instrument1->setEnabled(true);
+     ui->instrument2->setEnabled(true);
+     ui->instrument3->setEnabled(true);
+     ui->instrument4->setEnabled(true);
+     ui->instrument1->setChecked(false);
+     ui->instrument2->setChecked(false);
+     ui->instrument3->setChecked(false);
+     ui->instrument4->setChecked(false);
      ui->pushButton->setText("Reset Calibration");
     }
  }
@@ -251,4 +267,9 @@ void MainWindow::on_checkBox_clicked()
     }else{
         imagette=false;
     }
+}
+
+void MainWindow::on_instrument1_clicked()
+{
+
 }

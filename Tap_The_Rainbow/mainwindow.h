@@ -36,17 +36,24 @@ private slots:
 
     void on_checkBox_clicked();
 
+    void on_instrument1_clicked();
+
 private:
     Ui::MainWindow *ui;
     VideoCapture *cam;
     QTimer *timer = new QTimer(this);
     int *PositionX=0;
     int *PositionY=0;
-    bool ok=true;
-    bool manu=false;
-    bool multi = false;
-    bool imagette=false;
-    bool key=false;
+
+    bool manu=false;  // on active le calibrage manu
+    bool multi = false; //multijoueurs ou mode solo
+    bool imagette=false; // on souhaite voir les imagettes
+    bool key=false; //valide au moins un clic de l'utilisateur
+    //instruments activés
+    bool instrument1 = false;
+    bool instrument2 = false;
+    bool instrument3 = false;
+    bool instrument4 = false;
     Traitement_images TI;
     bool calibrationOk;
     Mat calibrationImg;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>514</width>
-    <height>423</height>
+    <width>550</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,7 +49,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>100</height>
+          <height>130</height>
          </size>
         </property>
         <property name="title">
@@ -75,7 +75,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>100</height>
+          <height>130</height>
          </size>
         </property>
         <property name="title">
@@ -97,9 +97,9 @@
         <widget class="QPushButton" name="pushButton">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>40</x>
            <y>60</y>
-           <width>101</width>
+           <width>161</width>
            <height>21</height>
           </rect>
          </property>
@@ -118,6 +118,58 @@
          </property>
          <property name="text">
           <string>Voir imagettes</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="instrument1">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>91</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Instrument 1</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="instrument2">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>80</y>
+           <width>91</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Instrument 2</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="instrument3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>91</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Instrument 3</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="instrument4">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>100</y>
+           <width>91</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Instrument 4</string>
          </property>
         </widget>
        </widget>
@@ -149,7 +201,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>514</width>
+     <width>550</width>
      <height>20</height>
     </rect>
    </property>
