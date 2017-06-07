@@ -40,6 +40,8 @@ private slots:
 
     void on_calibration_clicked();
 
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
     VideoCapture *cam;
@@ -78,6 +80,7 @@ private:
     Mat Img3T;
     Mat Img4T;
 
+    QString soloInstrument;
     int width;
     int height;
     Point centreImg;

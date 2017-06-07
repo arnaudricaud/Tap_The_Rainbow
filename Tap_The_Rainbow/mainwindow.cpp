@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->instrument2->setEnabled(false);
     ui->instrument3->setEnabled(false);
     ui->instrument4->setEnabled(false);
-    ui->instrument1->setText("Instrumant 1");
+    ui->instrument1->setText("Instrument 1");
     ui->instrument2->setText("Instrument 2");
     ui->instrument3->setText("Instrument 3");
     ui->instrument4->setText("Instrument 4");
@@ -157,10 +157,10 @@ void MainWindow::on_pushButton_clicked()
      ui->pushButton->setText("Reset Calibration");
      multiT->start(1000);
      play=true;
-     QString instru;
+    /* QString instru;
      instru=detectionInstrument(Img1);
      ui->instrument1->setText(instru);
-     /*instru=detectionInstrument(Img2);
+     instru=detectionInstrument(Img2);
      ui->instrument2->setText(instru);
      instru=detectionInstrument(Img3);
      ui->instrument3->setText(instru);
@@ -173,23 +173,35 @@ void MainWindow::on_pushButton_clicked()
 QString  MainWindow::detectionInstrument(Mat image){
     Mat resultImage;
     Mat templateImage;
+    int c=0;
     QString res;
     int i =0;
     double minVal; double maxVal; Point minLoc; Point maxLoc;
     double valeurMax=0;
     while(i!=4){
         switch(i){ //Choix de l'instrument
-        case 0 :  templateImage = imread("./debug/imagesSrc/batterie_ID.jpg");
+        case 0 :
+            templateImage = imread("./debug/batterie_ID.jpg");
             break;
-        case 1 : templateImage = imread("./debug/imagesSrc/harpe.jpg");
+        case 1 :
+            templateImage = imread("./debug/harpe.jpg");
+
             break;
-        case 2 : templateImage = imread("./debug/imagesSrc/piano_ID.jpg");
+        case 2 :
+            templateImage = imread("./debug/piano_ID.jpg");
             break;
-        case 3 : templateImage = imread("./debug/imagesSrc/flute.jpg");
+        case 3 :
+            templateImage = imread("./debug/flute.jpg");
             break;
         }
-            int result_cols =  image.cols - templateImage.cols + 1;
-            int result_rows = image.rows - templateImage.rows + 1;
+            int result_cols = 1.2*image.cols - templateImage.cols + 1;
+            int result_rows = 1.2*image.rows - templateImage.rows + 1;
+            if (result_cols<0){
+                result_cols=-result_cols;
+            }
+            if (result_rows<0){
+                result_rows=-result_rows;
+            }
             resultImage.create( result_cols, result_rows, CV_32FC1 );
             matchTemplate(image, templateImage, resultImage, TM_CCORR_NORMED );
             minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc, Mat());         
@@ -197,11 +209,12 @@ QString  MainWindow::detectionInstrument(Mat image){
             i=i+1;
             if (maxVal>valeurMax){
                 valeurMax=maxVal;
+                c=i-1;
                  qDebug()<<valeurMax<<"i : "<<i;
             }
             }
 //qDebug()<<maxVal<<"i : "<<i;
-   switch(i){
+   switch(c){
    case 0 :  res= "Batterie";
        break;
    case 1 :  res= "Harpe";
@@ -393,5 +406,25 @@ void MainWindow::on_calibration_clicked()
         calibrationOk=false;
         ui->calibration->setText("Calibration");
         soloT->stop();
+    }
+}
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    switch (index) {
+    case 0:
+        soloInstrument = "Batterie";
+        break;
+    case 1:
+        soloInstrument = "Piano";
+        break;
+    case 2:
+        soloInstrument = "Flûte";
+        break;
+    case 3:
+        soloInstrument = "Harpe";
+        break;
+    default:
+        break;
     }
 }
