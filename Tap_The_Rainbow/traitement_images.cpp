@@ -82,26 +82,31 @@ void Traitement_images::detectCouleur(Mat image, Mat mask){
             qDebug()<<"orange";
         }else if(teinte>=45 && teinte<75){
             qDebug()<<"jaune";
+            note.playNote(2);
         }else if(teinte>=75 && teinte<105){
             qDebug()<<"jaune-vert";
         }else if(teinte>=105 && teinte<135){
             qDebug()<<"vert";
-            note.playNote(1);
+            note.playNote(4);
         }else if(teinte>=135 && teinte<165){
             qDebug()<<"bleu-vert";
         }else if(teinte>=165 && teinte<195){
             qDebug()<<"cyan";
         }else if(teinte>=195 && teinte<225){
             qDebug()<<"bleu moyen";
+            note.playNote(1);
         }else if(teinte>=225 && teinte<255){
             qDebug()<<"bleu ";
         }else if(teinte>=255 && teinte<285){
             qDebug()<<"violet";
         }else if(teinte>=285 && teinte<315){
             qDebug()<<"magenta";
+            note.playNote(5);
         }else if(teinte>=315 && teinte<345){
             qDebug()<<"rose";
-        }else{qDebug()<<"rouge";
+        }else{
+            qDebug()<<"rouge";
+            note.playNote(3);
         }
     }
 
