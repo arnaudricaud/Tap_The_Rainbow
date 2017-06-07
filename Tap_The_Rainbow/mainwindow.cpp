@@ -194,8 +194,10 @@ QString  MainWindow::detectionInstrument(Mat image){
             templateImage = imread("./debug/flute.jpg");
             break;
         }
-            int result_cols = 1.2*image.cols - templateImage.cols + 1;
-            int result_rows = 1.2*image.rows - templateImage.rows + 1;
+            //int result_cols = image.cols - templateImage.cols + 1;
+            //int result_rows = image.rows - templateImage.rows + 1;
+        int result_cols = 180- templateImage.cols + 1;
+        int result_rows = 150 - templateImage.rows + 1;
             if (result_cols<0){
                 result_cols=-result_cols;
             }
@@ -210,10 +212,8 @@ QString  MainWindow::detectionInstrument(Mat image){
             if (maxVal>valeurMax){
                 valeurMax=maxVal;
                 c=i-1;
-                 qDebug()<<valeurMax<<"i : "<<i;
             }
             }
-//qDebug()<<maxVal<<"i : "<<i;
    switch(c){
    case 0 :  res= "Batterie";
        break;
@@ -227,26 +227,6 @@ QString  MainWindow::detectionInstrument(Mat image){
        res= "Instrument";
   }
    return res;
-   /* //détermination de l'instrument
-    if(maxLoc.x<centreImg.x){
-        if(maxLoc.y<centreImg.y){
-            QString res= "Piano 1";
-            return res;
-        }else{
-            QString res= "Pas Piano 1";
-            return res;
-        }
-
-    }else{
-        if(maxLoc.y<centreImg.y){
-        QString res= "Batterie";
-        return res;
-        }else{
-            QString res= "Batterie";
-            return res;
-
-        }
-    }*/
 }
 
 void  MainWindow::mousePressEvent(QMouseEvent *event) {
