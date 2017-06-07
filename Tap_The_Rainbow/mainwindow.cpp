@@ -22,8 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->groupBox_2->setEnabled(false);
     ui->groupBox->setEnabled(false);
+    ui->pushButton->setEnabled(false);
+    ui->checkAuto->setEnabled(true);
 
-
+    imagette=false;
     cam=new VideoCapture(0);
     width=cam->get(CV_CAP_PROP_FRAME_WIDTH);
     height=cam->get(CV_CAP_PROP_FRAME_HEIGHT);
@@ -77,43 +79,18 @@ void MainWindow::update(){
 
 void MainWindow::on_pushButton_clicked()
 {
-
-    if ( ui->checkAuto->isChecked()){
-
+    if (ui->pushButton->text()=="Reset Calibration"){
+     ui->checkAuto->setChecked(false);
+     ui->checkAuto->setEnabled(true);
+     ui->checkBox->setEnabled(true);
+     ui->checkBox->setChecked(false);
+     ui->pushButton->setText("Valider");
     }else{
-        Point maxLoc;
-        maxLoc.x=centreImg.x;
-        maxLoc.y=centreImg.y;
-
-                // HAUT GAUCHE
-                Mat Img1 =image;
-                Mat Img2 =image;
-                Img1 =Img1.colRange(0,maxLoc.x);
-                Img1=Img1.rowRange(0,maxLoc.y);
-                namedWindow("Haut GAUCHE",1);
-                imshow("Haut GAUCHE", Img1);
-                // HAUT DROIT
-
-                Img2=Img2.colRange(maxLoc.x,width);
-                Img2=Img2.rowRange(0,maxLoc.y);
-                namedWindow("HAUT DROIT",1);
-                imshow("HAUT DROIT", Img2);
-                // BAS GAUCHE
-                Mat Img3 =image;
-                Img3=Img3.colRange(0,maxLoc.x);
-                Img3=Img3.rowRange(maxLoc.y,height);
-                namedWindow("BAS GAUCHE",1);
-                imshow("BAS GAUCHE", Img3);
-                // BAS DROIT
-                Mat Img4 =image;
-                Img4=Img4.colRange(maxLoc.x,width);
-                Img4=Img4.rowRange(maxLoc.y,height);
-                namedWindow("BAS DROIT",1);
-                imshow("BAS DROIT", Img4);
-              // QString instrument= detectionInstrument(Img4,maxLoc);
-              // qDebug()<<instrument;
-             }
-        }
+     ui->checkAuto->setEnabled(false);
+     ui->checkBox->setEnabled(false);
+     ui->pushButton->setText("Reset Calibration");
+    }
+ }
 
 
 QString  MainWindow::detectionInstrument(Mat image,Point centre){
@@ -168,14 +145,11 @@ void  MainWindow::mousePressEvent(QMouseEvent *event) {
     if(manu){ //uniquement si le découpage manuel est activé
      int lPositionX = event->x();
      int lPositionY = event->y();
-
+     key=true;
      PositionX=&lPositionX;
      PositionY=&lPositionY;
      *PositionX=*PositionX-95;
      *PositionY=*PositionY-20;
-     qDebug()<<"x1: "<<*PositionX<<" et y1: "<<*PositionY;
-     qDebug()<<"xmax: "<<width<<" et ymax: "<<height;
-    // ok=false;
 
     if(*PositionX>0 && *PositionX<320){
         if(*PositionY>0 && *PositionY<240){
@@ -188,6 +162,7 @@ void  MainWindow::mousePressEvent(QMouseEvent *event) {
 void MainWindow::on_checkAuto_clicked()
 {
     manu=true;
+    ui->pushButton->setEnabled(true);
 }
 
 void MainWindow::on_imgCalib_clicked()
@@ -201,34 +176,43 @@ void MainWindow::on_imgCalib_clicked()
 }
 
 void MainWindow::decoupageImage(){
+   if (multi){
     Point maxLoc;
     maxLoc.x=*PositionX;
     maxLoc.y=*PositionY;
     cvtColor(image,image,CV_BGR2RGB);
     // HAUT GAUCHE
-    Mat Img1 =image;
+    Img1 =image;
     Img1 =Img1.colRange(0,maxLoc.x);
     Img1=Img1.rowRange(0,maxLoc.y);
-    namedWindow("Haut GAUCHE",1);
-    imshow("Haut GAUCHE", Img1);
+
     // HAUT DROIT
-    Mat Img2 =image;
+    Img2 =image;
     Img2=Img2.colRange(maxLoc.x,width);
     Img2=Img2.rowRange(0,maxLoc.y);
-    namedWindow("HAUT DROIT",1);
-    imshow("HAUT DROIT", Img2);
+
     // BAS GAUCHE
-    Mat Img3 =image;
+    Img3 =image;
     Img3=Img3.colRange(0,maxLoc.x);
     Img3=Img3.rowRange(maxLoc.y,height);
-    namedWindow("BAS GAUCHE",1);
-    imshow("BAS GAUCHE", Img3);
+
     // BAS DROIT
-    Mat Img4 =image;
+    Img4 =image;
     Img4=Img4.colRange(maxLoc.x,width);
     Img4=Img4.rowRange(maxLoc.y,height);
-    namedWindow("BAS DROIT",1);
-    imshow("BAS DROIT", Img4);
+
+    if (imagette && manu && key){
+     namedWindow("Haut GAUCHE",1);
+     imshow("Haut GAUCHE", Img1);
+     namedWindow("HAUT DROIT",1);
+     imshow("HAUT DROIT", Img2);
+     namedWindow("BAS GAUCHE",1);
+     imshow("BAS GAUCHE", Img3);
+     namedWindow("BAS DROIT",1);
+     imshow("BAS DROIT", Img4);
+    }
+
+   }
 }
 
 void MainWindow::on_butonMulti_clicked()
@@ -237,6 +221,7 @@ void MainWindow::on_butonMulti_clicked()
     ui->groupBox_2->setEnabled(true);
     ui->butonJoueur->setEnabled(true);
     ui->butonMulti->setEnabled(false);
+    multi=true;
 }
 
 void MainWindow::on_butonJoueur_clicked()
@@ -245,4 +230,25 @@ void MainWindow::on_butonJoueur_clicked()
     ui->groupBox_2->setEnabled(false);
     ui->butonJoueur->setEnabled(false);
     ui->butonMulti->setEnabled(true);
+    multi=false;
+}
+
+void MainWindow::on_checkBox_clicked()
+{
+    if (ui->checkBox->isChecked()){
+        imagette=true;
+        if (imagette && manu && key){
+         cvtColor(image,image,CV_BGR2RGB);
+         namedWindow("Haut GAUCHE",1);
+         imshow("Haut GAUCHE", Img1);
+         namedWindow("HAUT DROIT",1);
+         imshow("HAUT DROIT", Img2);
+         namedWindow("BAS GAUCHE",1);
+         imshow("BAS GAUCHE", Img3);
+         namedWindow("BAS DROIT",1);
+         imshow("BAS DROIT", Img4);
+        }
+    }else{
+        imagette=false;
+    }
 }

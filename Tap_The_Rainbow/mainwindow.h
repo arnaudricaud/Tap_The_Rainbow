@@ -34,6 +34,8 @@ private slots:
 
     void on_butonJoueur_clicked();
 
+    void on_checkBox_clicked();
+
 private:
     Ui::MainWindow *ui;
     VideoCapture *cam;
@@ -42,12 +44,19 @@ private:
     int *PositionY=0;
     bool ok=true;
     bool manu=false;
+    bool multi = false;
+    bool imagette=false;
+    bool key=false;
     Traitement_images TI;
     bool calibrationOk;
     Mat calibrationImg;
     Mat calibration;
     Mat capture;
     Mat image;
+    Mat Img1;
+    Mat Img2;
+    Mat Img3;
+    Mat Img4;
     int width;
     int height;
     Point centreImg;

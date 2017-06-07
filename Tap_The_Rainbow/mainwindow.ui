@@ -86,12 +86,12 @@
           <rect>
            <x>10</x>
            <y>30</y>
-           <width>91</width>
+           <width>111</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>Manuelle</string>
+          <string>Calibrage manuel</string>
          </property>
         </widget>
         <widget class="QPushButton" name="pushButton">
@@ -104,7 +104,20 @@
           </rect>
          </property>
          <property name="text">
-          <string>Calibrage</string>
+          <string>Valider</string>
+         </property>
+        </widget>
+        <widget class="QCheckBox" name="checkBox">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>30</y>
+           <width>91</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Voir imagettes</string>
          </property>
         </widget>
        </widget>
