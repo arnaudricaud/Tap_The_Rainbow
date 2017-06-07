@@ -6,34 +6,38 @@ PlaySound::PlaySound()
 }
 
 void PlaySound::playNote(int couleurs){
+    QSound *note = 0;
     switch(couleurs){
-    case 1 : QSound::play(":/sons/Ressource/MLDClapLess.wav");
+    case 1 : note = new QSound(":/sons/Ressource/MLDClapLess.wav");
         break;
-    case 2 : QSound::play(":/sons/Ressource/MLDSnareDeeper.wav");
+    case 2 : note = new QSound(":/sons/Ressource/MLDSnareDeeper.wav");
         break;
-    case 3 : QSound::play(":/sons/Ressource/MLDKickKnockLong.wav");
+    case 3 : note = new QSound(":/sons/Ressource/MLDKickKnockLong.wav");
         break;
-    case 4 : QSound::play(":/sons/Ressource/MLDCowbell.wav");
+    case 4 : note = new QSound(":/sons/Ressource/MLDCowbell.wav");
         break;
-    case 5 : QSound::play(":/sons/Ressource/MLDHat2.wav");
+    case 5 : note = new QSound(":/sons/Ressource/MLDHat2.wav");
         break;
-    case 6 : QSound::play(":/sons/Ressource/MLDClapLess.wav");
+    case 6 : note = new QSound(":/sons/Ressource/MLDClapLess.wav");
         break;
-    case 7 : QSound::play(":/sons/Ressource/MLDSnareDeeper.wav");
+    case 7 : note = new QSound(":/sons/Ressource/MLDSnareDeeper.wav");
         break;
-    case 8 : QSound::play(":/sons/Ressource/MLDKickKnockLong.wav");
+    case 8 : note = new QSound(":/sons/Ressource/MLDKickKnockLong.wav");
         break;
-    case 9 : QSound::play(":/sons/Ressource/MLDCowbell.wav");
+    case 9 : note = new QSound(":/sons/Ressource/MLDCowbell.wav");
         break;
-    case 10 : QSound::play(":/sons/Ressource/MLDHat2.wav");
+    case 10 : note = new QSound(":/sons/Ressource/MLDHat2.wav");
         break;
-    case 11 : QSound::play(":/sons/Ressource/MLDKickKnockLong.wav");
+    case 11 : note = new QSound(":/sons/Ressource/MLDKickKnockLong.wav");
         break;
-    case 12 : QSound::play(":/sons/Ressource/MLDCowbell.wav");
+    case 12 : note = new QSound(":/sons/Ressource/MLDCowbell.wav");
         break;
-    case 13 : QSound::play(":/sons/Ressource/MLDHat2.wav");
+    case 13 : note = new QSound(":/sons/Ressource/MLDHat2.wav");
         break;
     default : qDebug()<<"Something went wrong";
         break;
     }
+    //note->play();
+    while(!note->isFinished()); // attente
+    delete note;
 }
