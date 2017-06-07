@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->groupBox_2->setEnabled(false);
+    ui->groupBox->setEnabled(false);
+
 
     cam=new VideoCapture(0);
     width=cam->get(CV_CAP_PROP_FRAME_WIDTH);
@@ -46,7 +49,6 @@ MainWindow::~MainWindow()
 }
 void MainWindow::update(){
     if (cam->isOpened()) {
-
         if (cam->read(image)) {   // Capture a frame
             // Flip to get a mirror effect
             flip(image,image,1);
@@ -169,7 +171,7 @@ void  MainWindow::mousePressEvent(QMouseEvent *event) {
 
      PositionX=&lPositionX;
      PositionY=&lPositionY;
-     *PositionX=*PositionX-90;
+     *PositionX=*PositionX-95;
      *PositionY=*PositionY-20;
      qDebug()<<"x1: "<<*PositionX<<" et y1: "<<*PositionY;
      qDebug()<<"xmax: "<<width<<" et ymax: "<<height;
@@ -227,4 +229,20 @@ void MainWindow::decoupageImage(){
     Img4=Img4.rowRange(maxLoc.y,height);
     namedWindow("BAS DROIT",1);
     imshow("BAS DROIT", Img4);
+}
+
+void MainWindow::on_butonMulti_clicked()
+{
+    ui->groupBox->setEnabled(false);
+    ui->groupBox_2->setEnabled(true);
+    ui->butonJoueur->setEnabled(true);
+    ui->butonMulti->setEnabled(false);
+}
+
+void MainWindow::on_butonJoueur_clicked()
+{
+    ui->groupBox->setEnabled(true);
+    ui->groupBox_2->setEnabled(false);
+    ui->butonJoueur->setEnabled(false);
+    ui->butonMulti->setEnabled(true);
 }

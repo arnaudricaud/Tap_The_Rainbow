@@ -30,6 +30,10 @@ private slots:
     void on_checkAuto_clicked();
     void on_imgCalib_clicked();
 
+    void on_butonMulti_clicked();
+
+    void on_butonJoueur_clicked();
+
 private:
     Ui::MainWindow *ui;
     VideoCapture *cam;
